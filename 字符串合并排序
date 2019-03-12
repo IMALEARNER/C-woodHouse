@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<string.h>
+char a[2010];
+char b[1010];
+int main()
+{
+	scanf("%s%s",a,b);
+	strcat(a,b);
+	
+	char odd[1010];
+	char even[1010];
+	int len=strlen(a);
+	int i,j=0,k=0;
+	for(i=0;i<len;i++)
+	{
+		if((i+1)%2!=0) odd[j++]=a[i];
+		else if((i+1)%2==0)  even[k++]=a[i];
+	}
+	
+	int w,r;
+	char t;
+	for(w=1;w<=j;w++)
+	{
+		for(r=0;r<j-w;r++)
+		{
+			if(odd[r]>odd[r+1])
+			{
+				t=odd[r];
+				odd[r]=odd[r+1];
+				odd[r+1]=t;
+			}
+		}
+	}
+	for(w=1;w<=k;w++)
+	{
+		for(r=0;r<k-w;r++)
+		{
+			if(even[r]>even[r+1])
+			{
+				t=even[r];
+				even[r]=even[r+1];
+				even[r+1]=t;
+			}
+		}
+	}
+	
+	int m;
+	int h=0,g=0;
+	for(m=0;m<len;m++)
+	{
+		if((m+1)%2!=0) printf("%c",odd[h++]);
+		else  printf("%c",even[g++]);	
+	}
+	return 0;
+}
